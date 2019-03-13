@@ -4,27 +4,29 @@ from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.template import loader
 from django.urls import reverse
 from django.db.models import F
+from django.views import generic
 
 from . import models
 
 # Create your views here.
 
-def index(request):
-    latest_questions = models.Question.objects.order_by('-pub_date')[:5]
-    context = {
-    'latest_questions' : latest_questions,
-    }
-    return render( request, 'polls/index.html', context)
+class IndexView(generic.ListView):
+    # default template_name : <app_name>/<model_name>_list.html
+    template_name = "polls/index.html"
+    context_object_name = "latest_questions"
 
-def detail(request, question_id):
-    question = get_object_or_404(models.Question, pk=question_id)
-    return render(request ,'polls/detail.html', {'question' : question})
+    def get_queryset(self):
+        return models.Question.objects.order_by('-pub_date')[:5]
 
-def results(request, question_id):
-    question = get_object_or_404(models.Question, pk=question_id)
-    return render(request,"polls/results.html", {
-        "question" : question,
-    })
+class DetailView(generic.DetailView):
+    model = models.Question
+    # default template_name : <app_name>/<model_name>_detail.html
+    template_name = "polls/detail.html"
+
+class ResultView(generic.DetailView):
+    model = models.Question
+    #  default template_name : <app_name>/<model_name>_detail.html
+    template_name = "polls/results.html"
 
 def vote(request, question_id):
     question = get_object_or_404(models.Question, pk=question_id)
