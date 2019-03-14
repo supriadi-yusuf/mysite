@@ -5,6 +5,7 @@ from django.template import loader
 from django.urls import reverse
 from django.db.models import F
 from django.views import generic
+from django.utils import timezone
 
 from . import models
 
@@ -16,12 +17,21 @@ class IndexView(generic.ListView):
     context_object_name = "latest_questions"
 
     def get_queryset(self):
-        return models.Question.objects.order_by('-pub_date')[:5]
+        """
+        returns the last five future questions
+        """
+        return models.Question.objects.filter(
+            pub_date__lte = timezone.now()
+        ).order_by('-pub_date')[:5]
 
 class DetailView(generic.DetailView):
     model = models.Question
     # default template_name : <app_name>/<model_name>_detail.html
     template_name = "polls/detail.html"
+
+    def get_queryset(self):
+        return super().get_queryset().filter(pub_date__lte = timezone.now()        
+        ).order_by('-pub_date')
 
 class ResultView(generic.DetailView):
     model = models.Question
