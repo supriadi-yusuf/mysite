@@ -9,10 +9,14 @@ class ChoiceInline(admin.TabularInline):
     extra = 3 # add extra 3 choices
 
 class QuestionAdmin(admin.ModelAdmin):
+    ####### for insert / update question ########
     fieldsets = [
        ( None,               {'fields': ['question_text']}),
        ( 'Date Information', {'fields': ['pub_date']}),
     ]
     inlines = [ChoiceInline]
+
+    ###### for display item list #######
+    list_display = ('question_text', 'pub_date', 'was_published_recently')
 
 admin.site.register(models.Question, QuestionAdmin)
