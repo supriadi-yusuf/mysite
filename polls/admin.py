@@ -4,7 +4,7 @@ from . import models
 
 # Register your models here.
 
-class ChoiceInline(admin.StackedInline):
+class ChoiceInline(admin.TabularInline):
     model = models.Choice
     extra = 3 # add extra 3 choices
 
