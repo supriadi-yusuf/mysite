@@ -18,5 +18,7 @@ class QuestionAdmin(admin.ModelAdmin):
 
     ###### for display item list #######
     list_display = ('question_text', 'pub_date', 'was_published_recently')
+    list_filter = ['pub_date']
+    search_fields = ['question_text']
 
 admin.site.register(models.Question, QuestionAdmin)
