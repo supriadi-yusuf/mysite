@@ -1,0 +1,10 @@
+li a {
+  color: green;
+}
+
+body {
+  background-image: url("images/Cloud.jpg");
+  background-repeat: no-repeat;
+  /*background-position: bottom center;*/
+  background-size:cover;
+}
