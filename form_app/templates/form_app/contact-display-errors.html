@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>contact</title>
+  </head>
+  <body>
+
+    <form class="" action="" method="post">
+
+      {% csrf_token %}
+
+      {{form.non_field_errors}}
+
+
+      {% for field in form %}
+
+         {% if field in form.visible_fields %}
+
+            <div class="fieldwrapper">
+              
+            {% if field.errors %}
+
+               <p>Fix following issues :</p>
+               <ol class="errorlist">
+
+               {% for error in field.errors %}
+
+                  <li>{{error}}</li>
+
+               {% endfor %}
+
+               </ol>
+
+            {% endif %}
+
+            {{field.label_tag}}
+            {{field}}
+            </div>
+
+         {% elif field in form.hidden_fields %}
+
+            {{field}}
+
+         {% endif %}
+
+      {% endfor %}
+
+      <input type="submit" name="" value="send">
+
+    </form>
+
+  </body>
+</html>

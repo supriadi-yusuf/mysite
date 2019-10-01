@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{{page_title}}</title>
+  </head>
+  <body>
+
+    <h1>{{main_title}}</h1>
+
+    <ul>
+      {% for author in authors %}
+      <li>
+        <a href="{% url 'class-view-app:author-detail' author.pk %}">{{author.name}}</a>
+      </li>
+      {% endfor %}
+    </ul>
+
+  </body>
+</html>

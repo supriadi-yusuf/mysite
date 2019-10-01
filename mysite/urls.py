@@ -19,4 +19,18 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^polls/', include('polls.urls')),
+    url(r'^request/', include('handling_request.urls')),
+    url(r'^form/', include('form_app.urls')),
+    url(r'^formset/', include('formset_app.urls')),
+    url(r'^cookie/', include('cookie_app.urls')),
+    url(r'^session/', include('session_app.urls')),
+    url(r'^modelform/', include('modelform_app.urls')),
+    url(r'^modelformset/', include('modelformset_app.urls')),
+    url(r'^inlineformset/', include('inlineformset_app.urls')),
+    url(r'^formasset/', include('formasset_app.urls')),
+    url(r'^class-view/', include('class_view_app.urls')),
+    url(r'^authenticate-app/', include('authenticate_app.urls')),
+    url(r'^translation-app/', include('translation_app.urls')),
+    url(r'^signal-app/', include('signal_app.urls')),
+    url(r'^logging-app/', include('logging_app.urls')),
 ]

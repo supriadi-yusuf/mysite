@@ -39,16 +39,33 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     ###### created app ##########
     'polls.apps.PollsConfig',
+    'mymodel.apps.MymodelConfig',
+    'mymodel2.apps.Mymodel2Config',
+    'handling_request.apps.HandlingRequestConfig',
+    'app_request.apps.AppRequestConfig',
+    'form_app.apps.FormAppConfig',
+    'formset_app.apps.FormsetAppConfig',
+    'modelform_app.apps.ModelformAppConfig',
+    'modelformset_app.apps.ModelformsetAppConfig',
+    'inlineformset_app.apps.InlineformsetAppConfig',
+    'formasset_app.apps.FormassetAppConfig',
+    'class_view_app.apps.ClassViewAppConfig',
+    'authenticate_app.apps.AuthenticateAppConfig',
+    'translation_app.apps.TranslationAppConfig',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware', # spd : activate translation
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'supriadi.middleware.SimpleMiddleware',
+    'supriadi.middleware.simple_middleware',
+    #'supriadi.middleware2.TranslationMiddleware',
 ]
 
 ROOT_URLCONF = 'mysite.urls'
@@ -111,18 +128,86 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LOCALE_PATHS = [ os.path.join(BASE_DIR, 'locale')] # added by spd : locale path for language translation
+
+#LANGUAGE_CODE = 'en-us' # spd :: default language : english-USA
+LANGUAGE_CODE = 'id' # modified by spd :: default language : Indonesian
 
 TIME_ZONE = 'UTC'
 
-USE_I18N = True
+USE_I18N = True # spd :: enable translation
 
 USE_L10N = True
 
 USE_TZ = True
 
+LANGUAGES = [('id','Indonesian'),('en','English')]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+#STATIC_URL = 'http://static.example.com/'
+
+#print('dari settings.py')
+
+LOGGING = {
+    'version' : 1,
+    'disable_existing_loggers' : False,
+    'formatters' : {
+        'verbose' : {
+            'format' : '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+        },
+        'simple' : {
+            'format' : '%(levelname)s %(message)s'
+        }
+    },
+    'filters' : {
+        'special' : {
+            #'()' : 'project.logging.SpecialFilter',
+            'foo' : 'bar'
+        },
+        'require_debug_true' : {
+            '()' : 'django.utils.log.RequireDebugTrue'
+        }
+    },
+    'handlers' : {
+        'console' : {
+            'level' : 'INFO',
+            'filters' : ['require_debug_true'],
+            'class' : 'logging.StreamHandler',
+            'formatter' : 'simple'
+        },
+        'mail_admins' : {
+            'level' : 'ERROR',
+            'class' : 'django.utils.log.AdminEmailHandler',
+            'filters' : ['special']
+        },
+        'file' : {
+            'level' : 'ERROR',
+            'class' : 'logging.FileHandler',
+            'filename' : os.path.join( BASE_DIR, 'logging/logs.txt'),
+            'formatter' : 'verbose'
+        }
+    },
+    'loggers' : {
+        'django' : {
+            'handlers' : ['console'],
+            'propagate' : True
+        },
+        'django.request' : {
+            'handlers' : ['mail_admins'],
+            'level' : 'ERROR',
+            'propagate' : False
+        },
+        'myproject.custom' : {
+            'handlers' : ['console', 'mail_admins'],
+            'level' : 'INFO',
+            'filters' : ['special']
+        },
+        'logging_app.views' : {
+            'handlers' : ['console', 'file'],
+            'level' : 'INFO'
+        }
+    }
+}

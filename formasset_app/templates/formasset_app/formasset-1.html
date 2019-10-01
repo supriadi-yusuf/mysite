@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    {{form.media}}
+    <title>form asset</title>
+  </head>
+  <body>
+
+    <form class="" action="" method="post">
+
+      {% csrf_token %}
+
+      {{form.as_p}}
+
+      <input type="submit" name="" value="send">
+
+    </form>
+
+  </body>
+</html>

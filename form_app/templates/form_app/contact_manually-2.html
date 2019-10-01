@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>contact</title>
+  </head>
+  <body>
+
+    <form class="" action="" method="post">
+
+      {% csrf_token %}
+
+      {{form.non_field_errors}}
+
+      <div class="fieldwrapper">
+        {{form.subject.errors}}
+        {{form.subject.label_tag}}
+        {{form.subject}}
+      </div>
+
+      <div class="fieldwrapper">
+        {{form.message.errors}}
+        {{form.message.label_tag}}
+        {{form.message}}
+      </div>
+
+      <div class="fieldwrapper">
+        {{form.sender.errors}}
+        {{form.sender.label_tag}}
+        {{form.sender}}
+      </div>
+
+      <div class="fieldwrapper">
+        {{form.cc_myself.errors}}
+        {{form.cc_myself.label_tag}} 
+        {{form.cc_myself}}
+      </div>
+
+      <input type="submit" name="" value="send">
+
+    </form>
+
+  </body>
+</html>

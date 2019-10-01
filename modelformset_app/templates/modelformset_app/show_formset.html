@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Model Form Set</title>
+  </head>
+  <body>
+
+    <form class="" action="" method="post">
+      {% csrf_token %}
+
+      {{formset.management_form}}
+
+      {% for form in formset %}
+        {{form.as_p}}
+      {% endfor %}
+
+      <input type="submit" name="" value="send">
+
+    </form>
+
+  </body>
+</html>

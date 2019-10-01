@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Author Detail</title>
+  </head>
+  <body>
+
+    <h1>{{author.salutation}}. {{author.name}}</h1>
+    <h5>{{author.email}}</h5>
+
+      <a href="{% url 'class-view-app:author-list' %}">Back</a>
+
+  </body>
+</html>

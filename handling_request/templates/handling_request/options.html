@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Handling Request</title>
+  </head>
+  <body>
+    <h1>Choose Page :</h1>
+    <ul>
+      <li><a href="{% url 'my_app:list' %}">List ?</a> (1)</li>
+      <li><a href="{% url 'my_app:detail' %}">Detail ?</a> (2)</li>
+      <li><a href="{% url 'staff:list' %}">List Staff</a> (3)</li>
+      <li><a href="{% url 'staff:detail' %}">Detail Staff</a> (4)</li>
+      <li><a href="{% url 'my_app:list' %}">List Default</a> (5)</li>
+      <li><a href="{% url 'my_app:detail' %}">Detail Default</a> (6)</li>
+      <li><a href="{% url 'nested:extra:list' %}">List Nested Extra</a> (7)</li>
+      <li><a href="{% url 'nested:extra:detail' %}">Detail Nested Extra</a> (8)</li> 
+    </ul>
+
+  </body>
+</html>
